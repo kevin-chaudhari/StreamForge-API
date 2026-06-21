@@ -1,0 +1,54 @@
+version: "3.9"
+
+services:
+  # ── Watchly API ────────────────────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: watchly-api
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      mongo:
+        condition: service_healthy
+    volumes:
+      # Mount source for hot-reload in development
+      - ./src:/app/src:ro
+      - ./public/temp:/app/public/temp
+    networks:
+      - watchly-network
+
+  # ── MongoDB ────────────────────────────────────────────────────────────────
+  mongo:
+    image: mongo:7.0
+    container_name: watchly-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: watchly
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - watchly-network
+
+# ── Volumes ────────────────────────────────────────────────────────────────
+volumes:
+  mongo-data:
+    driver: local
+
+# ── Networks ───────────────────────────────────────────────────────────────
+networks:
+  watchly-network:
+    driver: bridge
