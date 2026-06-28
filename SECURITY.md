@@ -2,9 +2,9 @@
 
 ## Supported Versions
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 1.x     | ✅ Yes             |
+| Version | Supported |
+| ------- | --------- |
+| 1.x     | ✅ Yes    |
 
 ## Reporting a Vulnerability
 
@@ -25,12 +25,12 @@ Please include as much detail as possible:
 
 ## Response Timeline
 
-| Action | Timeline |
-|--------|----------|
-| Initial acknowledgment | Within 48 hours |
-| Vulnerability assessment | Within 5 business days |
-| Fix & patch release | Within 14 days (critical), 30 days (non-critical) |
-| Public disclosure | After patch is released |
+| Action                   | Timeline                                          |
+| ------------------------ | ------------------------------------------------- |
+| Initial acknowledgment   | Within 48 hours                                   |
+| Vulnerability assessment | Within 5 business days                            |
+| Fix & patch release      | Within 14 days (critical), 30 days (non-critical) |
+| Public disclosure        | After patch is released                           |
 
 ## Security Best Practices for Deployments
 

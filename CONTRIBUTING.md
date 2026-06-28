@@ -31,6 +31,7 @@ This project and everyone participating in it is governed by our [Code of Conduc
 Before creating a bug report, please check the [issue tracker](../../issues) to see if the problem has already been reported.
 
 When filing a bug, include:
+
 - **Clear title and description**
 - **Steps to reproduce**
 - **Expected vs. actual behavior**
@@ -40,6 +41,7 @@ When filing a bug, include:
 ### Suggesting Enhancements
 
 Enhancement suggestions are tracked as GitHub issues. When submitting:
+
 - Use a **clear, descriptive title**
 - Provide a **step-by-step description** of the enhancement
 - Explain **why** this enhancement would be useful
@@ -78,14 +80,14 @@ npm run dev
 
 Use the following prefixes:
 
-| Prefix | Purpose | Example |
-|--------|---------|---------|
-| `feat/` | New feature | `feat/add-video-search` |
-| `fix/` | Bug fix | `fix/video-validator-isImage` |
-| `docs/` | Documentation only | `docs/update-readme` |
+| Prefix      | Purpose                        | Example                        |
+| ----------- | ------------------------------ | ------------------------------ |
+| `feat/`     | New feature                    | `feat/add-video-search`        |
+| `fix/`      | Bug fix                        | `fix/video-validator-isImage`  |
+| `docs/`     | Documentation only             | `docs/update-readme`           |
 | `refactor/` | Code refactor (no feature/fix) | `refactor/playlist-controller` |
-| `test/` | Adding or updating tests | `test/user-controller` |
-| `chore/` | Maintenance tasks | `chore/update-dependencies` |
+| `test/`     | Adding or updating tests       | `test/user-controller`         |
+| `chore/`    | Maintenance tasks              | `chore/update-dependencies`    |
 
 ---
 
@@ -104,6 +106,7 @@ Follow the [Conventional Commits](https://www.conventionalcommits.org/) specific
 **Types:** `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
 
 **Examples:**
+
 ```
 feat(auth): add refresh token rotation
 fix(video): correct isImage validator always returning true
@@ -133,6 +136,7 @@ npx prettier --write .
 ```
 
 Key style rules:
+
 - 2-space indentation
 - Double quotes for strings
 - Semicolons required

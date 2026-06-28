@@ -8,9 +8,7 @@ const imageExtensions = [".gif", ".jpeg", ".png", ".jpg"];
  */
 const isImage = (filePath) => {
   if (!filePath) return false;
-  return imageExtensions.some((ext) =>
-    filePath.toLowerCase().endsWith(ext),
-  );
+  return imageExtensions.some((ext) => filePath.toLowerCase().endsWith(ext));
 };
 
 /**
@@ -20,9 +18,7 @@ const isImage = (filePath) => {
  */
 const isVideo = (filePath) => {
   if (!filePath) return false;
-  return videoExtensions.some((ext) =>
-    filePath.toLowerCase().endsWith(ext),
-  );
+  return videoExtensions.some((ext) => filePath.toLowerCase().endsWith(ext));
 };
 
 export { isVideo, isImage };

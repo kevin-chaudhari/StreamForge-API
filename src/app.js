@@ -21,7 +21,7 @@ app.use(
   cors({
     origin: process.env.CORS_ORIGIN,
     credentials: true,
-  }),
+  })
 );
 app.use(express.json({ limit: JSON_LIMIT }));
 app.use(express.urlencoded({ extended: true, limit: JSON_LIMIT }));
@@ -56,4 +56,3 @@ app.use((err, req, res, next) => {
 });
 
 export { app };
-

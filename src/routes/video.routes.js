@@ -26,7 +26,7 @@ router
         maxCount: 1,
       },
     ]),
-    uploadVideo,
+    uploadVideo
   );
 
 router.route("/v/:videoId").get(getVideoById).delete(verifyJWT, deleteVideo);

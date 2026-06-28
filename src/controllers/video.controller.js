@@ -4,10 +4,7 @@ import { Category } from "../models/category.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import {
-  deleteFromCloudinary,
-  uploadOnCloudinary,
-} from "../utils/Cloudinary.js";
+import { deleteFromCloudinary, uploadOnCloudinary } from "../utils/Cloudinary.js";
 import { isImage, isVideo } from "../validators/video.validator.js";
 import OpenAI from "openai";
 
@@ -54,8 +51,8 @@ const getAllVideos = asyncHandler(async (req, res) => {
           hasMore,
         },
       },
-      "Videos fetched successfully!",
-    ),
+      "Videos fetched successfully!"
+    )
   );
 });
 
@@ -68,8 +65,7 @@ const uploadVideo = asyncHandler(async (req, res) => {
   const { title, description, isPublished, category } = req.body;
 
   if (!title || title === "") throw new ApiError(400, "Title can't be empty");
-  if (!description || description === "")
-    throw new ApiError(400, "Description can't be empty");
+  if (!description || description === "") throw new ApiError(400, "Description can't be empty");
 
   // get category from db
   const categoryObject = await Category.findOne({
@@ -78,9 +74,7 @@ const uploadVideo = asyncHandler(async (req, res) => {
   if (!categoryObject) throw new ApiError(400, "Invalid Category");
 
   // get video file from multer middleware
-  if (
-    !(req.files && Array.isArray(req.files.video) && req.files.video.length > 0)
-  )
+  if (!(req.files && Array.isArray(req.files.video) && req.files.video.length > 0))
     throw new ApiError(400, "Video file required");
 
   // if file is present get the path
@@ -90,17 +84,11 @@ const uploadVideo = asyncHandler(async (req, res) => {
   if (!isVideo(videoLocalPath))
     throw new ApiError(
       400,
-      "Video File should be of type: '.mpg', '.mp2', '.mpeg', '.mpe', '.mpv', '.mp4'",
+      "Video File should be of type: '.mpg', '.mp2', '.mpeg', '.mpe', '.mpv', '.mp4'"
     );
 
   // get thumbnail file from multer middleware
-  if (
-    !(
-      req.files &&
-      Array.isArray(req.files.thumbnail) &&
-      req.files.thumbnail.length > 0
-    )
-  )
+  if (!(req.files && Array.isArray(req.files.thumbnail) && req.files.thumbnail.length > 0))
     throw new ApiError(400, "thumbnail file required");
 
   // if file is present get the path
@@ -108,18 +96,13 @@ const uploadVideo = asyncHandler(async (req, res) => {
 
   // check the file format for thumbnail
   if (!isImage(thumbnailLocalPath))
-    throw new ApiError(
-      400,
-      "Thumbnail File should be of type: '.gif', '.jpg', '.jpeg', '.png'",
-    );
+    throw new ApiError(400, "Thumbnail File should be of type: '.gif', '.jpg', '.jpeg', '.png'");
 
   // upload video and thumbnail to the cloudinary
   const videoFile = await uploadOnCloudinary(videoLocalPath);
-  if (!videoFile)
-    throw new ApiError(500, "Error while uploading video file to cloud");
+  if (!videoFile) throw new ApiError(500, "Error while uploading video file to cloud");
   const thumbnail = await uploadOnCloudinary(thumbnailLocalPath);
-  if (!thumbnail)
-    throw new ApiError(500, "Error while uploading thumbnail to cloud");
+  if (!thumbnail) throw new ApiError(500, "Error while uploading thumbnail to cloud");
 
   // Extract the public ID from the Cloudinary URL
   const url = videoFile.url;
@@ -146,13 +129,10 @@ const uploadVideo = asyncHandler(async (req, res) => {
   // fetch newly created video
   const newVideo = await Video.findById(video._id);
 
-  if (!newVideo)
-    throw new ApiError(500, "Something went wrong while uploading video");
+  if (!newVideo) throw new ApiError(500, "Something went wrong while uploading video");
 
   // return response
-  return res
-    .status(200)
-    .json(new ApiResponse(200, newVideo, "Video uploaded successfully!"));
+  return res.status(200).json(new ApiResponse(200, newVideo, "Video uploaded successfully!"));
 });
 
 const getVideoById = asyncHandler(async (req, res) => {
@@ -192,9 +172,7 @@ const getVideoById = asyncHandler(async (req, res) => {
   ]);
   if (!video) throw new ApiError(404, "Video not found!");
 
-  return res
-    .status(200)
-    .json(new ApiResponse(200, video, "Video fetched successfully!"));
+  return res.status(200).json(new ApiResponse(200, video, "Video fetched successfully!"));
 });
 
 const deleteVideo = asyncHandler(async (req, res) => {
@@ -214,26 +192,19 @@ const deleteVideo = asyncHandler(async (req, res) => {
   const deleteThumbnail = await deleteFromCloudinary(video.thumbnail, "image");
 
   if (!deleteVideoFile || !deleteThumbnail)
-    throw new ApiError(
-      500,
-      "Problem occured while deleting the assets from cloudinary",
-    );
+    throw new ApiError(500, "Problem occured while deleting the assets from cloudinary");
 
   // delete video from the db
   const deleteVideo = await Video.findByIdAndDelete(videoId);
-  if (!deleteVideo)
-    throw new ApiError(500, "Problem occured while deleting the video!x");
+  if (!deleteVideo) throw new ApiError(500, "Problem occured while deleting the video!x");
 
-  return res
-    .status(200)
-    .json(new ApiResponse(200, {}, "Video deleted successfully"));
+  return res.status(200).json(new ApiResponse(200, {}, "Video deleted successfully"));
 });
 
 const generateAiDescription = asyncHandler(async (req, res) => {
   const { videoTitle } = req.body;
 
-  if (!videoTitle || videoTitle === "")
-    throw new ApiError(400, "VideoTitle is required.");
+  if (!videoTitle || videoTitle === "") throw new ApiError(400, "VideoTitle is required.");
 
   const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -271,10 +242,4 @@ Your Output: A complete, ready-to-use YouTube video description optimized for SE
     .json(new ApiResponse(200, description, "Description fetched successfully!"));
 });
 
-export {
-  getAllVideos,
-  uploadVideo,
-  getVideoById,
-  deleteVideo,
-  generateAiDescription,
-};
+export { getAllVideos, uploadVideo, getVideoById, deleteVideo, generateAiDescription };

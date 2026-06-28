@@ -23,10 +23,10 @@
 
 Watchly is a **scalable, RESTful backend API** that replicates the core functionality of YouTube. Built with modern Node.js best practices, it provides a complete content platform backend including media management, social engagement features, creator analytics, and AI-powered tooling.
 
-| What it solves | Who it's for |
-|---|---|
-| Bootstrapping a video-sharing backend from scratch | Developers building video/content platforms |
-| Learning production-grade Node.js API architecture | Students & engineers studying full-stack development |
+| What it solves                                      | Who it's for                                          |
+| --------------------------------------------------- | ----------------------------------------------------- |
+| Bootstrapping a video-sharing backend from scratch  | Developers building video/content platforms           |
+| Learning production-grade Node.js API architecture  | Students & engineers studying full-stack development  |
 | A portfolio-ready backend to pair with any frontend | Engineers targeting SWE interviews & job applications |
 
 ---
@@ -34,12 +34,14 @@ Watchly is a **scalable, RESTful backend API** that replicates the core function
 ## ✨ Features
 
 ### 🔐 Authentication & Authorization
+
 - **JWT-based auth** with stateless access tokens (short-lived) + stateful refresh tokens (long-lived)
 - **Secure token rotation** — every refresh generates a new refresh token and invalidates the old
 - **Role-based access control** — regular users vs. admin users enforced at middleware level
 - **HttpOnly cookie delivery** + `Authorization: Bearer` header support for flexible client integration
 
 ### 🎥 Video Platform
+
 - **Video upload** with automatic Cloudinary CDN storage and duration extraction
 - **Auto-generated video previews** — 3-segment highlight clips via Cloudinary video transformations
 - **AI-powered description generation** using OpenAI GPT-4o-mini with SEO optimization
@@ -48,6 +50,7 @@ Watchly is a **scalable, RESTful backend API** that replicates the core function
 - **View tracking** per video
 
 ### 👥 Social Features
+
 - **Channel subscriptions** — subscribe/unsubscribe with subscriber count aggregation
 - **Like / unlike toggle** on videos, comments, and tweets
 - **Threaded comments** — nested reply support with paginated loading
@@ -56,11 +59,13 @@ Watchly is a **scalable, RESTful backend API** that replicates the core function
 - **Liked videos feed** — aggregated list of all content a user has liked
 
 ### 📊 Creator Dashboard
+
 - **Channel analytics** — total views, subscribers, likes, videos, and tweets in a single query
 - **Video management** — list, view, update, and delete your own videos
 - **Thumbnail updates** — replace video thumbnails with automatic Cloudinary cleanup
 
 ### 🛠 Developer Features
+
 - **Consistent API shape** — every endpoint returns `{ statusCode, data, message, success }`
 - **Centralized error handling** — global Express error middleware with dev stack traces
 - **Multer file handling** — collision-safe unique filename generation
@@ -221,24 +226,24 @@ erDiagram
 
 ## 🧰 Tech Stack
 
-| Layer | Technology | Purpose |
-|---|---|---|
-| **Runtime** | Node.js 20 LTS | JavaScript server runtime |
-| **Framework** | Express 4 | HTTP server & middleware |
-| **Database** | MongoDB + Mongoose 8 | Document store + ODM |
-| **Pagination** | mongoose-aggregate-paginate-v2 | Aggregate query pagination |
-| **Auth** | JSON Web Tokens (`jsonwebtoken`) | Stateless auth tokens |
-| **Password Hashing** | bcrypt | Secure password storage (10 rounds) |
-| **Media Storage** | Cloudinary SDK v2 | Video, thumbnail, avatar CDN |
-| **File Uploads** | Multer | Multipart form handling |
-| **AI** | OpenAI SDK (GPT-4o-mini) | Description generation |
-| **CORS** | `cors` | Cross-origin resource sharing |
-| **Cookies** | `cookie-parser` | HttpOnly cookie handling |
-| **Config** | `dotenv` | Environment variable management |
-| **Containerization** | Docker + Docker Compose | Portable deployment |
-| **CI/CD** | GitHub Actions | Lint, format, build validation |
-| **Formatting** | Prettier | Code style consistency |
-| **Linting** | ESLint | Static code analysis |
+| Layer                | Technology                       | Purpose                             |
+| -------------------- | -------------------------------- | ----------------------------------- |
+| **Runtime**          | Node.js 20 LTS                   | JavaScript server runtime           |
+| **Framework**        | Express 4                        | HTTP server & middleware            |
+| **Database**         | MongoDB + Mongoose 8             | Document store + ODM                |
+| **Pagination**       | mongoose-aggregate-paginate-v2   | Aggregate query pagination          |
+| **Auth**             | JSON Web Tokens (`jsonwebtoken`) | Stateless auth tokens               |
+| **Password Hashing** | bcrypt                           | Secure password storage (10 rounds) |
+| **Media Storage**    | Cloudinary SDK v2                | Video, thumbnail, avatar CDN        |
+| **File Uploads**     | Multer                           | Multipart form handling             |
+| **AI**               | OpenAI SDK (GPT-4o-mini)         | Description generation              |
+| **CORS**             | `cors`                           | Cross-origin resource sharing       |
+| **Cookies**          | `cookie-parser`                  | HttpOnly cookie handling            |
+| **Config**           | `dotenv`                         | Environment variable management     |
+| **Containerization** | Docker + Docker Compose          | Portable deployment                 |
+| **CI/CD**            | GitHub Actions                   | Lint, format, build validation      |
+| **Formatting**       | Prettier                         | Code style consistency              |
+| **Linting**          | ESLint                           | Static code analysis                |
 
 ---
 
@@ -320,14 +325,14 @@ watchly-api/
 
 ### Prerequisites
 
-| Requirement | Version | Notes |
-|---|---|---|
-| Node.js | ≥ 20.x | [Download](https://nodejs.org) |
-| npm | ≥ 10.x | Bundled with Node.js |
-| MongoDB | ≥ 6.x | Atlas (cloud) or local |
-| Cloudinary account | — | [Sign up free](https://cloudinary.com) |
-| OpenAI API key | — | [Get key](https://platform.openai.com/api-keys) |
-| Docker (optional) | ≥ 24.x | For containerized setup |
+| Requirement        | Version | Notes                                           |
+| ------------------ | ------- | ----------------------------------------------- |
+| Node.js            | ≥ 20.x  | [Download](https://nodejs.org)                  |
+| npm                | ≥ 10.x  | Bundled with Node.js                            |
+| MongoDB            | ≥ 6.x   | Atlas (cloud) or local                          |
+| Cloudinary account | —       | [Sign up free](https://cloudinary.com)          |
+| OpenAI API key     | —       | [Get key](https://platform.openai.com/api-keys) |
+| Docker (optional)  | ≥ 24.x  | For containerized setup                         |
 
 ---
 
@@ -401,20 +406,20 @@ Create a `.env` file from `.env.example`:
 cp .env.example .env
 ```
 
-| Variable | Description | Required | Example |
-|---|---|---|---|
-| `PORT` | HTTP server port | No (default: 3000) | `3000` |
-| `MONGO_URI` | Full MongoDB connection string | ✅ Yes | `mongodb+srv://user:pass@cluster.mongodb.net` |
-| `CORS_ORIGIN` | Allowed client origin(s) | ✅ Yes | `https://yourapp.com` or `*` (dev only) |
-| `ACCESS_TOKEN_SECRET` | JWT signing secret for access tokens | ✅ Yes | Long random string (≥32 chars) |
-| `ACCESS_TOKEN_EXPIRY` | Access token lifetime | No (default: `1d`) | `15m`, `1h`, `1d` |
-| `REFRESH_TOKEN_SECRET` | JWT signing secret for refresh tokens | ✅ Yes | Different long random string |
-| `REFRESH_TOKEN_EXPIRY` | Refresh token lifetime | No (default: `10d`) | `7d`, `30d` |
-| `CLOUDINARY_CLOUD_NAME` | Your Cloudinary cloud name | ✅ Yes | `my-cloud` |
-| `CLOUDINARY_API_KEY` | Cloudinary API key | ✅ Yes | `123456789012345` |
-| `CLOUDINARY_API_SECRET` | Cloudinary API secret | ✅ Yes | `abc123...` |
-| `OPENAI_API_KEY` | OpenAI API key for AI descriptions | ✅ Yes | `sk-...` |
-| `NODE_ENV` | Runtime environment | No (default: `development`) | `production` |
+| Variable                | Description                           | Required                    | Example                                       |
+| ----------------------- | ------------------------------------- | --------------------------- | --------------------------------------------- |
+| `PORT`                  | HTTP server port                      | No (default: 3000)          | `3000`                                        |
+| `MONGO_URI`             | Full MongoDB connection string        | ✅ Yes                      | `mongodb+srv://user:pass@cluster.mongodb.net` |
+| `CORS_ORIGIN`           | Allowed client origin(s)              | ✅ Yes                      | `https://yourapp.com` or `*` (dev only)       |
+| `ACCESS_TOKEN_SECRET`   | JWT signing secret for access tokens  | ✅ Yes                      | Long random string (≥32 chars)                |
+| `ACCESS_TOKEN_EXPIRY`   | Access token lifetime                 | No (default: `1d`)          | `15m`, `1h`, `1d`                             |
+| `REFRESH_TOKEN_SECRET`  | JWT signing secret for refresh tokens | ✅ Yes                      | Different long random string                  |
+| `REFRESH_TOKEN_EXPIRY`  | Refresh token lifetime                | No (default: `10d`)         | `7d`, `30d`                                   |
+| `CLOUDINARY_CLOUD_NAME` | Your Cloudinary cloud name            | ✅ Yes                      | `my-cloud`                                    |
+| `CLOUDINARY_API_KEY`    | Cloudinary API key                    | ✅ Yes                      | `123456789012345`                             |
+| `CLOUDINARY_API_SECRET` | Cloudinary API secret                 | ✅ Yes                      | `abc123...`                                   |
+| `OPENAI_API_KEY`        | OpenAI API key for AI descriptions    | ✅ Yes                      | `sk-...`                                      |
+| `NODE_ENV`              | Runtime environment                   | No (default: `development`) | `production`                                  |
 
 > **⚠️ Security:** In production, set `CORS_ORIGIN` to your exact frontend URL, never `*`. Set `NODE_ENV=production` to suppress stack traces in error responses.
 
@@ -431,109 +436,109 @@ cp .env.example .env
 
 ### 🙍 Users — `/users`
 
-| Method | Endpoint | Auth | Description |
-|---|---|---|---|
-| `POST` | `/register` | — | Register with avatar + optional cover image |
-| `POST` | `/login` | — | Login, receive access + refresh token cookies |
-| `POST` | `/logout` | 🔒 | Logout and clear token cookies |
-| `POST` | `/refresh-token` | 🔒 | Rotate access + refresh tokens |
-| `POST` | `/change-password` | 🔒 | Change password (validates old password) |
-| `GET` | `/get-user` | 🔒 | Get current authenticated user's profile |
-| `PATCH` | `/update-user` | 🔒 | Update `fullName` and/or `email` |
-| `PATCH` | `/update-avatar` | 🔒 | Replace avatar image (Cloudinary) |
-| `PATCH` | `/update-cover-img` | 🔒 | Replace cover image (Cloudinary) |
-| `GET` | `/c/:username` | — | Get channel profile with subscriber counts |
-| `POST` | `/subscribe-channel` | 🔒 | Subscribe to a channel |
-| `GET` | `/history` | 🔒 | Get authenticated user's watch history |
+| Method  | Endpoint             | Auth | Description                                   |
+| ------- | -------------------- | ---- | --------------------------------------------- |
+| `POST`  | `/register`          | —    | Register with avatar + optional cover image   |
+| `POST`  | `/login`             | —    | Login, receive access + refresh token cookies |
+| `POST`  | `/logout`            | 🔒   | Logout and clear token cookies                |
+| `POST`  | `/refresh-token`     | 🔒   | Rotate access + refresh tokens                |
+| `POST`  | `/change-password`   | 🔒   | Change password (validates old password)      |
+| `GET`   | `/get-user`          | 🔒   | Get current authenticated user's profile      |
+| `PATCH` | `/update-user`       | 🔒   | Update `fullName` and/or `email`              |
+| `PATCH` | `/update-avatar`     | 🔒   | Replace avatar image (Cloudinary)             |
+| `PATCH` | `/update-cover-img`  | 🔒   | Replace cover image (Cloudinary)              |
+| `GET`   | `/c/:username`       | —    | Get channel profile with subscriber counts    |
+| `POST`  | `/subscribe-channel` | 🔒   | Subscribe to a channel                        |
+| `GET`   | `/history`           | 🔒   | Get authenticated user's watch history        |
 
 ---
 
 ### 🎬 Videos — `/videos`
 
-| Method | Endpoint | Auth | Description |
-|---|---|---|---|
-| `GET` | `/` | — | Paginated video feed (cursor-based) |
-| `POST` | `/` | 🔒 | Upload video + thumbnail to Cloudinary |
-| `GET` | `/v/:videoId` | — | Get video by ID with owner details |
-| `DELETE` | `/v/:videoId` | 🔒 | Delete video (owner only) — removes from Cloudinary |
-| `GET` | `/generate-ai-desc` | 🔒 | Generate AI video description via GPT-4o-mini |
+| Method   | Endpoint            | Auth | Description                                         |
+| -------- | ------------------- | ---- | --------------------------------------------------- |
+| `GET`    | `/`                 | —    | Paginated video feed (cursor-based)                 |
+| `POST`   | `/`                 | 🔒   | Upload video + thumbnail to Cloudinary              |
+| `GET`    | `/v/:videoId`       | —    | Get video by ID with owner details                  |
+| `DELETE` | `/v/:videoId`       | 🔒   | Delete video (owner only) — removes from Cloudinary |
+| `GET`    | `/generate-ai-desc` | 🔒   | Generate AI video description via GPT-4o-mini       |
 
 **Pagination query params for `GET /videos`:**
 
-| Param | Type | Default | Description |
-|---|---|---|---|
-| `limit` | number | `10` | Results per page |
-| `cursor` | string | — | ID of the last item from previous page |
-| `sortOrder` | `asc` \| `desc` | `desc` | Sort direction (newest first by default) |
+| Param       | Type            | Default | Description                              |
+| ----------- | --------------- | ------- | ---------------------------------------- |
+| `limit`     | number          | `10`    | Results per page                         |
+| `cursor`    | string          | —       | ID of the last item from previous page   |
+| `sortOrder` | `asc` \| `desc` | `desc`  | Sort direction (newest first by default) |
 
 ---
 
 ### 🎵 Playlists — `/playlist`
 
-| Method | Endpoint | Auth | Description |
-|---|---|---|---|
-| `POST` | `/` | 🔒 | Create playlist with initial videos |
-| `GET` | `/my-playlists` | 🔒 | Get all playlists owned by current user |
-| `GET` | `/:playlistId` | — | Get playlist by ID with full video details |
-| `PATCH` | `/:playlistId` | 🔒 | Update playlist name/description (owner only) |
-| `DELETE` | `/:playlistId` | 🔒 | Delete playlist (owner only) |
-| `PATCH` | `/add/:videoId/:playlistId` | 🔒 | Add a video to playlist (owner only) |
-| `PATCH` | `/remove/:videoId/:playlistId` | 🔒 | Remove a video from playlist (owner only) |
+| Method   | Endpoint                       | Auth | Description                                   |
+| -------- | ------------------------------ | ---- | --------------------------------------------- |
+| `POST`   | `/`                            | 🔒   | Create playlist with initial videos           |
+| `GET`    | `/my-playlists`                | 🔒   | Get all playlists owned by current user       |
+| `GET`    | `/:playlistId`                 | —    | Get playlist by ID with full video details    |
+| `PATCH`  | `/:playlistId`                 | 🔒   | Update playlist name/description (owner only) |
+| `DELETE` | `/:playlistId`                 | 🔒   | Delete playlist (owner only)                  |
+| `PATCH`  | `/add/:videoId/:playlistId`    | 🔒   | Add a video to playlist (owner only)          |
+| `PATCH`  | `/remove/:videoId/:playlistId` | 🔒   | Remove a video from playlist (owner only)     |
 
 ---
 
 ### 👍 Likes — `/likes`
 
-| Method | Endpoint | Auth | Description |
-|---|---|---|---|
-| `POST` | `/toggle/v/:videoId` | 🔒 | Toggle like on a video |
-| `POST` | `/toggle/t/:tweetId` | 🔒 | Toggle like on a tweet |
-| `POST` | `/toggle/c/:commentId` | 🔒 | Toggle like on a comment |
-| `GET` | `/videos` | 🔒 | Get all videos liked by current user |
+| Method | Endpoint               | Auth | Description                          |
+| ------ | ---------------------- | ---- | ------------------------------------ |
+| `POST` | `/toggle/v/:videoId`   | 🔒   | Toggle like on a video               |
+| `POST` | `/toggle/t/:tweetId`   | 🔒   | Toggle like on a tweet               |
+| `POST` | `/toggle/c/:commentId` | 🔒   | Toggle like on a comment             |
+| `GET`  | `/videos`              | 🔒   | Get all videos liked by current user |
 
 ---
 
 ### 💬 Comments — `/comments`
 
-| Method | Endpoint | Auth | Description |
-|---|---|---|---|
-| `GET` | `/:videoId` | — | Get paginated comments for a video |
-| `POST` | `/:videoId` | 🔒 | Add a comment to a video |
-| `PATCH` | `/c/:commentId` | 🔒 | Update comment content (owner only) |
-| `DELETE` | `/c/:commentId` | 🔒 | Delete a comment (owner only) |
+| Method   | Endpoint        | Auth | Description                         |
+| -------- | --------------- | ---- | ----------------------------------- |
+| `GET`    | `/:videoId`     | —    | Get paginated comments for a video  |
+| `POST`   | `/:videoId`     | 🔒   | Add a comment to a video            |
+| `PATCH`  | `/c/:commentId` | 🔒   | Update comment content (owner only) |
+| `DELETE` | `/c/:commentId` | 🔒   | Delete a comment (owner only)       |
 
 ---
 
 ### 🐦 Tweets — `/tweets`
 
-| Method | Endpoint | Auth | Description |
-|---|---|---|---|
-| `POST` | `/` | 🔒 | Create a new tweet |
-| `GET` | `/user/:userId` | — | Get all tweets from a user |
-| `PATCH` | `/:tweetId` | 🔒 | Update tweet content (owner only) |
-| `DELETE` | `/:tweetId` | 🔒 | Delete a tweet (owner only) |
+| Method   | Endpoint        | Auth | Description                       |
+| -------- | --------------- | ---- | --------------------------------- |
+| `POST`   | `/`             | 🔒   | Create a new tweet                |
+| `GET`    | `/user/:userId` | —    | Get all tweets from a user        |
+| `PATCH`  | `/:tweetId`     | 🔒   | Update tweet content (owner only) |
+| `DELETE` | `/:tweetId`     | 🔒   | Delete a tweet (owner only)       |
 
 ---
 
 ### 📊 Dashboard — `/dashboard`
 
-| Method | Endpoint | Auth | Description |
-|---|---|---|---|
-| `GET` | `/stats` | 🔒 | Channel analytics (views, subscribers, likes, videos, tweets) |
-| `GET` | `/videos` | 🔒 | Paginated list of the authenticated user's videos |
-| `GET` | `/videos/:videoId` | 🔒 | Get single video (owner only) |
-| `PATCH` | `/videos/:videoId` | 🔒 | Update title, description, or thumbnail (owner only) |
+| Method  | Endpoint           | Auth | Description                                                   |
+| ------- | ------------------ | ---- | ------------------------------------------------------------- |
+| `GET`   | `/stats`           | 🔒   | Channel analytics (views, subscribers, likes, videos, tweets) |
+| `GET`   | `/videos`          | 🔒   | Paginated list of the authenticated user's videos             |
+| `GET`   | `/videos/:videoId` | 🔒   | Get single video (owner only)                                 |
+| `PATCH` | `/videos/:videoId` | 🔒   | Update title, description, or thumbnail (owner only)          |
 
 ---
 
 ### 🗂 Categories — `/category`
 
-| Method | Endpoint | Auth | Description |
-|---|---|---|---|
-| `GET` | `/all` | — | Get all available categories |
-| `POST` | `/add` | 👑 Admin | Create a new category |
-| `PATCH` | `/modify` | 👑 Admin | Rename a category |
-| `DELETE` | `/remove` | 👑 Admin | Delete a category |
+| Method   | Endpoint  | Auth     | Description                  |
+| -------- | --------- | -------- | ---------------------------- |
+| `GET`    | `/all`    | —        | Get all available categories |
+| `POST`   | `/add`    | 👑 Admin | Create a new category        |
+| `PATCH`  | `/modify` | 👑 Admin | Rename a category            |
+| `DELETE` | `/remove` | 👑 Admin | Delete a category            |
 
 **Available categories:** Cars & Vehicles, Comedy, Education, Gaming, Entertainment, Film & Animation, How-to & Style, Music, News & Politics, People & Blogs, Pets & Animals, Science & Technology, Sports, Travel & Events, Uncategorised
 
@@ -541,15 +546,16 @@ cp .env.example .env
 
 ### ❤️ Health — `/healthcheck`
 
-| Method | Endpoint | Auth | Description |
-|---|---|---|---|
-| `GET` | `/healthcheck` | — | Returns `200 OK` — used by Docker/load balancers |
+| Method | Endpoint       | Auth | Description                                      |
+| ------ | -------------- | ---- | ------------------------------------------------ |
+| `GET`  | `/healthcheck` | —    | Returns `200 OK` — used by Docker/load balancers |
 
 ---
 
 ## ⚡ Performance Design
 
 ### Cursor-Based Pagination
+
 Offset-based pagination (`SKIP n`) requires MongoDB to scan and discard `n` documents — this degrades linearly as data grows. Watchly uses **cursor-based pagination** on the `_id` field:
 
 ```
@@ -561,9 +567,11 @@ GET /api/v1/videos?limit=10&cursor=<lastId>&sortOrder=desc
 - Returns `nextCursor` and `hasMore` for clean infinite-scroll client integration
 
 ### MongoDB Aggregation Pipelines
+
 Complex data requirements (channel stats, watch history with owner details, liked videos feed) are resolved **server-side** in a single database round-trip using `$lookup`, `$match`, `$group`, and `$addFields` pipeline stages — eliminating N+1 query problems.
 
 ### Cloudinary Media Optimization
+
 - Uploaded files are **deleted from local disk** immediately after Cloudinary upload
 - **Public ID extraction** from URL allows targeted asset deletion on video/avatar replace
 - **Video previews** generated server-side via Cloudinary URL transformations (no client processing)
@@ -572,19 +580,19 @@ Complex data requirements (channel stats, watch history with owner details, like
 
 ## 🔒 Security
 
-| Measure | Implementation |
-|---|---|
-| **Password hashing** | bcrypt with 10 salt rounds |
-| **Stateless auth** | JWT access tokens — no server-side session storage |
-| **Token refresh security** | Refresh tokens stored in DB; old token invalidated on every rotation |
-| **HttpOnly cookies** | Prevents XSS access to tokens via `document.cookie` |
-| **File type validation** | Extension whitelist checked before Cloudinary upload |
-| **Ownership enforcement** | Every mutation verifies `req.user._id === resource.owner` |
-| **Admin middleware** | `verifyAdmin` checks `user.admin` flag before any privileged action |
-| **Request size limiting** | `express.json({ limit: "16kb" })` prevents payload flooding |
-| **Unique file names** | Multer uses `Date.now() + random` to prevent filename collision/traversal |
-| **Production error masking** | Stack traces omitted from responses when `NODE_ENV=production` |
-| **CORS** | Configurable origin allowlist via `CORS_ORIGIN` env var |
+| Measure                      | Implementation                                                            |
+| ---------------------------- | ------------------------------------------------------------------------- |
+| **Password hashing**         | bcrypt with 10 salt rounds                                                |
+| **Stateless auth**           | JWT access tokens — no server-side session storage                        |
+| **Token refresh security**   | Refresh tokens stored in DB; old token invalidated on every rotation      |
+| **HttpOnly cookies**         | Prevents XSS access to tokens via `document.cookie`                       |
+| **File type validation**     | Extension whitelist checked before Cloudinary upload                      |
+| **Ownership enforcement**    | Every mutation verifies `req.user._id === resource.owner`                 |
+| **Admin middleware**         | `verifyAdmin` checks `user.admin` flag before any privileged action       |
+| **Request size limiting**    | `express.json({ limit: "16kb" })` prevents payload flooding               |
+| **Unique file names**        | Multer uses `Date.now() + random` to prevent filename collision/traversal |
+| **Production error masking** | Stack traces omitted from responses when `NODE_ENV=production`            |
+| **CORS**                     | Configurable origin allowlist via `CORS_ORIGIN` env var                   |
 
 ---
 

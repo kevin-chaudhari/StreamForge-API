@@ -49,7 +49,7 @@ const deleteFromCloudinary = async (url, type) => {
       { invalidate: true, resource_type: type },
       function (result) {
         console.log(result);
-      },
+      }
     );
     return response;
   } catch (error) {

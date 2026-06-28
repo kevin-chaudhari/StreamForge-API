@@ -51,7 +51,7 @@ const userSchema = new Schema(
       type: String,
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 // Pre is a mongoose hook
@@ -78,7 +78,7 @@ userSchema.methods.generateAccessToken = function () {
     process.env.ACCESS_TOKEN_SECRET,
     {
       expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
-    },
+    }
   );
 };
 userSchema.methods.generateRefreshToken = function () {
@@ -89,7 +89,7 @@ userSchema.methods.generateRefreshToken = function () {
     process.env.REFRESH_TOKEN_SECRET,
     {
       expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
-    },
+    }
   );
 };
 

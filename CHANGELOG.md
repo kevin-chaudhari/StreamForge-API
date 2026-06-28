@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned
+
 - Frontend React/Next.js client ([yt-clone-fullstack](https://github.com/DoDoxD1/yt-clone-fullstack))
 - Unit and integration test suite (Jest + Supertest)
 - Rate limiting middleware
@@ -21,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.1.0] — 2025-06-20
 
 ### Added
+
 - `.env.example` with documented descriptions for all environment variables
 - `CONTRIBUTING.md` — contribution guide with branch naming and commit conventions
 - `CODE_OF_CONDUCT.md` — Contributor Covenant v2.1
@@ -33,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MIT `LICENSE` file
 
 ### Fixed
+
 - **Critical:** `isImage()` in `video.validator.js` always returned `true` — now correctly uses `.some()` with `.endsWith()`
 - **Critical:** `isVideo()` in `video.validator.js` used `.map()` causing only the last extension to be checked — fixed to use `.some()`
 - **Critical:** `APIError` (OpenAI class) used instead of `ApiError` (local class) in `video.controller.js` — would crash at runtime
@@ -44,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Typos `feild` → `field` in `user.validator.js` error messages
 
 ### Changed
+
 - `multer.middleware.js` — unique filename generation using `Date.now()` + random suffix to prevent collisions and path-traversal issues
 - `app.js` — route imports moved to top of file (ESM best practice); `urlencoded` body parser now applies `JSON_LIMIT`
 - `src/index.js` — removed large commented-out dead code block; added Express `app.on("error")` listener; improved log messages
@@ -56,6 +60,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] — 2025-03-01
 
 ### Added
+
 - Initial release of Watchly REST API
 - JWT authentication with access + refresh token rotation
 - User registration, login, logout, and profile management

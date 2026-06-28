@@ -7,9 +7,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 
 // helper function
 const isUserOwner = (userId, ownerId) => {
-  return new mongoose.Types.ObjectId(`${userId}`).equals(
-    new mongoose.Types.ObjectId(`${ownerId}`),
-  );
+  return new mongoose.Types.ObjectId(`${userId}`).equals(new mongoose.Types.ObjectId(`${ownerId}`));
 };
 
 // route functions
@@ -18,8 +16,7 @@ const createTweet = asyncHandler(async (req, res) => {
 
   // get content from request body
   const { content } = req.body;
-  if (!content || content === "")
-    throw new ApiError(400, "Tweet content is missing");
+  if (!content || content === "") throw new ApiError(400, "Tweet content is missing");
 
   // create a new tweet
   const tweet = await Tweet.create({
@@ -33,9 +30,7 @@ const createTweet = asyncHandler(async (req, res) => {
   const newTweet = await Tweet.findById(tweet?._id);
   if (!newTweet) throw new ApiError(404, "Tweet not found!");
 
-  return res
-    .status(200)
-    .json(new ApiResponse(200, newTweet, "Tweeted successfully!"));
+  return res.status(200).json(new ApiResponse(200, newTweet, "Tweeted successfully!"));
 });
 
 const getUserTweets = asyncHandler(async (req, res) => {
@@ -55,9 +50,7 @@ const getUserTweets = asyncHandler(async (req, res) => {
 
   if (!tweets) throw new ApiError(500, "Unable to fetch tweets");
 
-  return res
-    .status(200)
-    .json(new ApiResponse(200, tweets, "Tweet fetched successfully!"));
+  return res.status(200).json(new ApiResponse(200, tweets, "Tweet fetched successfully!"));
 });
 
 const updateTweet = asyncHandler(async (req, res) => {
@@ -68,31 +61,26 @@ const updateTweet = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Tweet id not found or is not valid!");
 
   const { content } = req.body;
-  if (!content || content === "")
-    throw new ApiError(400, "Provide content to update!");
+  if (!content || content === "") throw new ApiError(400, "Provide content to update!");
 
   //check tweet is present in db
   const tweet = await Tweet.findById(tweetId);
   if (!tweet) throw new ApiError(404, "Tweet not found!");
 
   // check user is owner of tweet
-  if (!isUserOwner(userId, tweet?.owner))
-    throw new ApiError(400, "Only owner can modify tweet!");
+  if (!isUserOwner(userId, tweet?.owner)) throw new ApiError(400, "Only owner can modify tweet!");
 
   const update = await Tweet.findByIdAndUpdate(tweet?._id, {
     $set: {
       content,
     },
   });
-  if (!update)
-    throw new ApiError(500, "Error occured while updating the tweet!");
+  if (!update) throw new ApiError(500, "Error occured while updating the tweet!");
 
   const newTweet = await Tweet.findById(update?._id);
   if (!newTweet) throw new ApiError(404, "Updated tweet not found!");
 
-  return res
-    .status(200)
-    .json(new ApiResponse(200, newTweet, "Tweet updated successfully!"));
+  return res.status(200).json(new ApiResponse(200, newTweet, "Tweet updated successfully!"));
 });
 
 const deleteTweet = asyncHandler(async (req, res) => {
@@ -107,16 +95,12 @@ const deleteTweet = asyncHandler(async (req, res) => {
   if (!tweet) throw new ApiError(404, "Tweet not found!");
 
   // check user is owner of tweet
-  if (!isUserOwner(userId, tweet?.owner))
-    throw new ApiError(400, "Only owner can modify tweet!");
+  if (!isUserOwner(userId, tweet?.owner)) throw new ApiError(400, "Only owner can modify tweet!");
 
   const deleteRes = await Tweet.findByIdAndDelete(tweet?._id);
-  if (!deleteRes)
-    throw new ApiError(500, "Error occured while deleting the tweet!");
+  if (!deleteRes) throw new ApiError(500, "Error occured while deleting the tweet!");
 
-  return res
-    .status(200)
-    .json(new ApiResponse(200, {}, "Tweet deleted succesfully!"));
+  return res.status(200).json(new ApiResponse(200, {}, "Tweet deleted succesfully!"));
 });
 
 export { createTweet, getUserTweets, updateTweet, deleteTweet };

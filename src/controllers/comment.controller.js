@@ -7,9 +7,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 
 // helper functions
 const isUserOwner = (userId, ownerId) => {
-  return new mongoose.Types.ObjectId(`${userId}`).equals(
-    new mongoose.Types.ObjectId(`${ownerId}`),
-  );
+  return new mongoose.Types.ObjectId(`${userId}`).equals(new mongoose.Types.ObjectId(`${ownerId}`));
 };
 
 // route functions
@@ -57,8 +55,7 @@ const getVideoComments = asyncHandler(async (req, res) => {
     .skip((page - 1) * limit)
     .sort({ createdAt: -1 });
 
-  if (!comments)
-    throw new ApiError(500, "Error occured while fetching comments!");
+  if (!comments) throw new ApiError(500, "Error occured while fetching comments!");
 
   const count = await Comment.countDocuments();
 
@@ -70,8 +67,8 @@ const getVideoComments = asyncHandler(async (req, res) => {
         totalPages: Math.ceil(count / limit),
         currentPage: page,
       },
-      "Comments fetched successfully!",
-    ),
+      "Comments fetched successfully!"
+    )
   );
 });
 
@@ -91,21 +88,16 @@ const addComment = asyncHandler(async (req, res) => {
   });
 
   const newComment = await Comment.findById(createComment?._id);
-  if (!newComment)
-    throw new ApiError(500, "Error occurred while creating comment!");
+  if (!newComment) throw new ApiError(500, "Error occurred while creating comment!");
 
-  res
-    .status(200)
-    .json(new ApiResponse(200, newComment, "Comment successfully!"));
+  res.status(200).json(new ApiResponse(200, newComment, "Comment successfully!"));
 });
 
 const updateComment = asyncHandler(async (req, res) => {
   const { commentId } = req.params;
   const { content } = req.body;
-  if (!content || content === "")
-    throw new ApiError(400, "Comment content could not be empty!");
-  if (!commentId || !isValidObjectId(commentId))
-    throw new ApiError(400, "Comment Id required!");
+  if (!content || content === "") throw new ApiError(400, "Comment content could not be empty!");
+  if (!commentId || !isValidObjectId(commentId)) throw new ApiError(400, "Comment Id required!");
 
   //check comment exists in db
   const comment = await Comment.findById(commentId);
@@ -121,20 +113,16 @@ const updateComment = asyncHandler(async (req, res) => {
     },
   });
 
-  if (!updateRes)
-    throw new ApiError(500, "Error occurred while updating comment!");
+  if (!updateRes) throw new ApiError(500, "Error occurred while updating comment!");
 
   const newComment = await Comment.findById(updateRes?._id);
 
-  res
-    .status(200)
-    .json(new ApiResponse(200, newComment, "Comment updated successfully!"));
+  res.status(200).json(new ApiResponse(200, newComment, "Comment updated successfully!"));
 });
 
 const deleteComment = asyncHandler(async (req, res) => {
   const { commentId } = req.params;
-  if (!commentId || !isValidObjectId(commentId))
-    throw new ApiError(400, "Comment Id required!");
+  if (!commentId || !isValidObjectId(commentId)) throw new ApiError(400, "Comment Id required!");
 
   //check comment exists in db
   const comment = await Comment.findById(commentId);
@@ -146,12 +134,9 @@ const deleteComment = asyncHandler(async (req, res) => {
 
   const delComment = await Comment.findByIdAndDelete(commentId);
 
-  if (!delComment)
-    throw new ApiError(500, "Error occurred while deleting comment!");
+  if (!delComment) throw new ApiError(500, "Error occurred while deleting comment!");
 
-  res
-    .status(200)
-    .json(new ApiResponse(200, {}, "Comment deleted successfully!"));
+  res.status(200).json(new ApiResponse(200, {}, "Comment deleted successfully!"));
 });
 
 export { getVideoComments, addComment, updateComment, deleteComment };

@@ -29,7 +29,7 @@ router.route("/register").post(
       maxCount: 1,
     },
   ]),
-  registerUser,
+  registerUser
 );
 
 router.route("/login").post(loginUser);
@@ -41,12 +41,8 @@ router.route("/refresh-token").post(verifyJWT, refreshAccessToken);
 router.route("/change-password").post(verifyJWT, changePassword);
 router.route("/get-user").get(verifyJWT, getCurrentUser);
 router.route("/update-user").patch(verifyJWT, updateUser);
-router
-  .route("/update-avatar")
-  .patch(verifyJWT, upload.single("avatar"), updateAvatar);
-router
-  .route("/update-cover-img")
-  .patch(verifyJWT, upload.single("coverImage"), updateCoverImg);
+router.route("/update-avatar").patch(verifyJWT, upload.single("avatar"), updateAvatar);
+router.route("/update-cover-img").patch(verifyJWT, upload.single("coverImage"), updateCoverImg);
 router.route("/history").get(verifyJWT, getWatchHistory);
 router.route("/subscribe-channel").post(verifyJWT, subscribeChannel);
 

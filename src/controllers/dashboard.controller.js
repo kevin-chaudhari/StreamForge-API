@@ -6,10 +6,7 @@ import { Like } from "../models/like.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import {
-  deleteFromCloudinary,
-  uploadOnCloudinary,
-} from "../utils/Cloudinary.js";
+import { deleteFromCloudinary, uploadOnCloudinary } from "../utils/Cloudinary.js";
 
 const getChannelStats = asyncHandler(async (req, res) => {
   // get total number of views on the channel
@@ -84,8 +81,8 @@ const getChannelStats = asyncHandler(async (req, res) => {
         totalSubscribers,
         totalTweets,
       },
-      "Stats fetched successfully!",
-    ),
+      "Stats fetched successfully!"
+    )
   );
 });
 
@@ -155,8 +152,8 @@ const getChannelVideos = asyncHandler(async (req, res) => {
           hasMore,
         },
       },
-      "Videos fetched successfully!",
-    ),
+      "Videos fetched successfully!"
+    )
   );
 });
 
@@ -220,9 +217,7 @@ const getChannelVideo = asyncHandler(async (req, res) => {
   ]);
   if (!video) throw new ApiError(404, "Video not found!");
 
-  return res
-    .status(200)
-    .json(new ApiResponse(200, video, "Video fetched successfully!"));
+  return res.status(200).json(new ApiResponse(200, video, "Video fetched successfully!"));
 });
 
 const updateChannelVideo = asyncHandler(async (req, res) => {
@@ -259,7 +254,7 @@ const updateChannelVideo = asyncHandler(async (req, res) => {
         thumbnail: thumbnail?.url || video.thumbnail,
       },
     },
-    { new: true },
+    { new: true }
   );
 
   if (!newVideo) throw new ApiError(404, "Video not found");
@@ -267,9 +262,4 @@ const updateChannelVideo = asyncHandler(async (req, res) => {
   res.status(200).json(new ApiResponse(200, newVideo, "Video updated"));
 });
 
-export {
-  getChannelStats,
-  getChannelVideos,
-  getChannelVideo,
-  updateChannelVideo,
-};
+export { getChannelStats, getChannelVideos, getChannelVideo, updateChannelVideo };

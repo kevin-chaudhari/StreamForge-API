@@ -47,8 +47,7 @@ const toggleVideoLike = asyncHandler(async (req, res) => {
 
 const toggleCommentLike = asyncHandler(async (req, res) => {
   const { commentId } = req.params;
-  if (!isValidObjectId(commentId))
-    throw new ApiError(400, "Invalid comment id");
+  if (!isValidObjectId(commentId)) throw new ApiError(400, "Invalid comment id");
 
   // check comment is in db
   const comment = await Comment.findById(commentId);
@@ -178,9 +177,7 @@ const getLikedVideos = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(
-      new ApiResponse(200, likedVideos, "Liked videos fetched successfully!"),
-    );
+    .json(new ApiResponse(200, likedVideos, "Liked videos fetched successfully!"));
 });
 
 export { toggleCommentLike, toggleTweetLike, toggleVideoLike, getLikedVideos };

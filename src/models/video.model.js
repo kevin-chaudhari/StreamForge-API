@@ -65,7 +65,7 @@ const videoSchema = new Schema(
       default: "",
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 // Plugin is a mongoose hook
