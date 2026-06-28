@@ -9,10 +9,10 @@
     "dev": "nodemon -r dotenv/config --experimental-json-modules src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Arihant Jain",
+  "author": "Chaudhari Kevin",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "bcrypt": "^6.0.0",
     "cloudinary": "^2.5.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -26,6 +26,7 @@
     "openai": "^4.89.0"
   },
   "devDependencies": {
+    "eslint": "^10.6.0",
     "nodemon": "^3.1.9",
     "prettier": "^3.5.3"
   }
